@@ -48,7 +48,16 @@ class MNISTModel:
     def train(self):
         for epoch in range(self.epochs):
             running_loss = 0.0
-            #TODO
+            for images, labels in self.train_loader:
+                self.optimizer.zero_grad()
+                
+                outputs = self.model(images)
+                loss = self.criterion(outputs, labels)
+                loss.backward()
+                self.optimizer.step()
+                
+                running_loss += loss.item()
+            
             print(f"Epoch {epoch + 1}, Loss: {running_loss / len(self.train_loader)}")
         print("Training finished.")
     

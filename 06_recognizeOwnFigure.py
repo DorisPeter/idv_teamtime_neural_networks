@@ -88,16 +88,19 @@ class MNISTModel:
     
     def predict_image(self, image_path):
         # Bild laden
-        #TODO
+        image = Image.open(image_path).convert('L')
         
         # Bildgröße ändern und Transformation anwenden
-        #TODO
+        image = image.resize((28, 28))
+        image = self.transform(image)
         
         # Batch-Dimension hinzufügen
         image = image.unsqueeze(0)
         
         # Bild durch das Modell laufen lassen
-        #TODO
+        with torch.no_grad():
+            outputs = self.model(image)
+            _, predicted = torch.max(outputs.data, 1)
         
         return predicted.item()
 
@@ -110,8 +113,8 @@ if __name__ == '__main__':
     mnist_model.load_model()
 
     # Beispiel-Bildvorhersage
-    image_path = #TODO   # Pfad zum Bild mit der handgeschriebenen Zahl
-    prediction = #TODO
+    image_path = os.path.join('C:\\Users\\dpet\\teamtime\\neuralNetworks_07_2024\\code\\handwritten_figures\\7.jpeg')   # Pfad zum Bild mit der handgeschriebenen Zahl
+    prediction = mnist_model.predict_image(image_path)
     print(f'Vorhersage für das Bild: {prediction}')
 
     # Das Bild anzeigen

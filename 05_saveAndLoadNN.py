@@ -75,11 +75,12 @@ class MNISTModel:
         print(f'Accuracy of the network on the 10000 test images: {100 * correct / total} %')
 
     def save_model(self, path='simple_nn.pth'):
-        #TODO
+        torch.save(self.model.state_dict(), path)
         print("Saved model.")
 
     def load_model(self, path='simple_nn.pth'):
-        #TODO
+        self.model.load_state_dict(torch.load(path))
+        self.model.eval()
         print("loaded model.")
     
 
