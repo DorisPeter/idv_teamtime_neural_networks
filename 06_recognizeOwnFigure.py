@@ -113,7 +113,6 @@ if __name__ == '__main__':
     mnist_model.load_model()
 
     # Beispiel-Bildvorhersage
-    #C:\\Users\\dpet\\teamtime\\neuralNetworks_07_2024\\code\\handwritten_figures
     image_path = os.path.join('.\\images\\7.jpeg')   # Pfad zum Bild mit der handgeschriebenen Zahl
     prediction = mnist_model.predict_image(image_path)
     print(f'Vorhersage für das Bild: {prediction}')
