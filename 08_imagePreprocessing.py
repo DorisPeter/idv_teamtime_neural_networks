@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-## hint. To install cv2, type 'pip install opencv-python'
+## hint. To install cv2, type pip install opencv-python
 
 def preprocess_image(image_path):
     # Bild laden
@@ -33,7 +33,7 @@ def preprocess_image(image_path):
     return img_centered
 
 # Beispielbildpfad (hier musst du den Pfad zu deinem Bild angeben)
-image_path = '.\\images\\8.jpeg'
+image_path = '.\\images\\8_i.jpeg'
 
 # Bild vorverarbeiten
 processed_image = preprocess_image(image_path)
@@ -44,4 +44,4 @@ plt.title('Processed Image')
 plt.show()
 
 # Bild speichern
-plt.imsave('.\\images\\8_preprocessed.jpeg', processed_image, cmap='gray')
+plt.imsave('.\\images\\8_i_preprocessed.jpeg', processed_image, cmap='gray')
