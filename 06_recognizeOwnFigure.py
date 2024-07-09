@@ -124,7 +124,7 @@ if __name__ == '__main__':
     mnist_model.load_model()
 
     # Beispiel-Bildvorhersage
-    image_path = os.path.join('.\\images\\8_preprocessed.jpeg')   # Pfad zum Bild mit der handgeschriebenen Zahl
+    image_path = os.path.join('.\\images\\8_i_preprocessed.jpeg')   # Pfad zum Bild mit der handgeschriebenen Zahl
     prediction = mnist_model.predict_image(image_path)
     print(f'Vorhersage für das Bild: {prediction}')
 
