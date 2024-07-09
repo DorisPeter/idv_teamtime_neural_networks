@@ -4,6 +4,7 @@ from torch import nn, optim
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 from PIL import Image
+import PIL.ImageOps
 import matplotlib.pyplot as plt
 
 class MNISTModel:
@@ -87,16 +88,26 @@ class MNISTModel:
         print("loaded model.")
     
     def predict_image(self, image_path):
+
+        # Bildverarbeitung: Größe ändern und in Tensor konvertieren
+        transform = transforms.Compose([
+            transforms.Resize((28, 28)),
+            transforms.Grayscale(),
+            transforms.ToTensor(),
+            transforms.Normalize((0.5,), (0.5,))
+            ])
         # Bild laden
         image = Image.open(image_path).convert('L')
         
         # Bildgröße ändern und Transformation anwenden
         image = image.resize((28, 28))
-        image = self.transform(image)
+        image = transform(image)
         
         # Batch-Dimension hinzufügen
         image = image.unsqueeze(0)
         
+        # Modellvorhersage
+        self.model.eval()  # Modell in den Evaluationsmodus setzen
         # Bild durch das Modell laufen lassen
         with torch.no_grad():
             outputs = self.model(image)
@@ -107,13 +118,13 @@ class MNISTModel:
 # Beispielhafte Nutzung der Klasse
 if __name__ == '__main__':
     mnist_model = MNISTModel()
-    mnist_model.train()
-    mnist_model.evaluate()
-    mnist_model.save_model()
+    #mnist_model.train()
+    #mnist_model.evaluate()
+    #mnist_model.save_model()
     mnist_model.load_model()
 
     # Beispiel-Bildvorhersage
-    image_path = os.path.join('.\\images\\7.jpeg')   # Pfad zum Bild mit der handgeschriebenen Zahl
+    image_path = os.path.join('.\\images\\8_preprocessed.jpeg')   # Pfad zum Bild mit der handgeschriebenen Zahl
     prediction = mnist_model.predict_image(image_path)
     print(f'Vorhersage für das Bild: {prediction}')
 
